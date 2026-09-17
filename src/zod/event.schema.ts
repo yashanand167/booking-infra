@@ -10,4 +10,26 @@ export const eventSchema = z.object({
   updatedAt: z.date(),
 });
 
+const createEventSchema = eventSchema.omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+});
+
+const updateEventSchema = eventSchema.partial().omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+});
+
+const deleteEventSchema = z.object({
+  id: z.string().uuid(),
+});
+
+export type DeleteEvent = z.infer<typeof deleteEventSchema>;
+
+export type UpdateEvent = z.infer<typeof updateEventSchema>;
+
+export type CreateEvent = z.infer<typeof createEventSchema>;
+
 export type Event = z.infer<typeof eventSchema>;
