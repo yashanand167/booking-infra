@@ -7,6 +7,7 @@
   "dependencies": {
     "@prisma/adapter-pg": "^7.10.0",
     "@prisma/client": "7",
+    "bcryptjs": "^3.0.3",
     "hono": "^4.13.8",
     "ioredis": "^6.0.0",
     "pg": "^8.23.0",

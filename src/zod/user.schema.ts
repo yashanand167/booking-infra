@@ -1,4 +1,4 @@
-import {z} from "zod";
+import { z } from "zod";
 
 const PasswordSchema = z
   .string()
@@ -18,4 +18,11 @@ export const userSchema = z.object({
   updatedAt: z.date(),
 });
 
+export const createUserSchema = userSchema.omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+});
+
 export type User = z.infer<typeof userSchema>;
+export type CreateUser = z.infer<typeof createUserSchema>;
