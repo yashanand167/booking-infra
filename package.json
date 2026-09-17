@@ -2,7 +2,13 @@
   "name": "booking-infra",
   "scripts": {
     "dev": "bun run --hot src/index.ts",
+    "seed": "bun run prisma/seed.ts",
+    "test": "bun test",
+    "test:register": "bun test src/tests/register-user.test.ts",
     "postinstall": "prisma skills sync || exit 0"
+  },
+  "prisma": {
+    "seed": "bun run prisma/seed.ts"
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.10.0",
