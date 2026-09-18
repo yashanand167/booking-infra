@@ -24,6 +24,7 @@ model User {
 
 model Event {
   id        String    @id @default(cuid())
+  creatorId String    
   name      String
   capacity  Int
   bookings  Booking[]
