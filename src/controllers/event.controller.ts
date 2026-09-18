@@ -12,12 +12,10 @@ const eventService = new EventService();
 export const createEvent = factory.createHandlers(async (c) => {
   try {
     const event = await c.req.json();
-    const userId = c.get("userId");
 
     const validatedEvent = createEventSchema.parse(event);
 
     const newEvent = await eventService.createEvent(
-      userId,
       validatedEvent
     );
 

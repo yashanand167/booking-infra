@@ -2,23 +2,13 @@ import { CreateEvent } from "../zod/event.schema";
 import { prisma } from "../lib/prisma";
 
 export class EventService {
-  async createEvent(creatorId: string, event: CreateEvent) {
-    const checkUser = await prisma.user.findUnique({
-      where: {
-        id: creatorId,
-      },
-    });
-
-    if (!checkUser) {
-      throw new Error("User with this ID does not exist");
-    }
+  async createEvent( event: CreateEvent) {
 
     const newEvent = await prisma.event.create({
       data: {
         ...event,
       },
     });
-    console.log("New Event Created:", newEvent);
     return {
       id: newEvent.id,
       name: newEvent.name,

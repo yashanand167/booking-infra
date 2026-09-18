@@ -8,7 +8,6 @@ const eventFields = {
 
 export const eventSchema = z.object({
   id: z.string(),
-  creatorId: z.string(),
   ...eventFields,
   createdAt: z.date(),
   updatedAt: z.date(),
