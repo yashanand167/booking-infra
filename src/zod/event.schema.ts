@@ -1,35 +1,31 @@
-import {z} from "zod";
+import { z } from "zod";
+
+const eventFields = {
+  name: z.string().min(2).max(100),
+  date: z.coerce.date(),
+  capacity: z.number().int().positive(),
+};
 
 export const eventSchema = z.object({
-  id: z.string().uuid(),
-  creatorId: z.string().uuid(),
-  name: z.string().min(2).max(100),
-  date: z.date(),
-  capacity: z.number().int().positive(),
+  id: z.string(),
+  creatorId: z.string(),
+  ...eventFields,
   createdAt: z.date(),
   updatedAt: z.date(),
 });
 
-const createEventSchema = eventSchema.omit({
-  id: true,
-  createdAt: true,
-  updatedAt: true,
+export const createEventSchema = z.object(eventFields);
+
+export const updateEventSchema = z
+  .object(eventFields)
+  .partial();
+
+
+export const deleteEventSchema = z.object({
+  id: z.string(),
 });
-
-const updateEventSchema = eventSchema.partial().omit({
-  id: true,
-  createdAt: true,
-  updatedAt: true,
-});
-
-const deleteEventSchema = z.object({
-  id: z.string().uuid(),
-});
-
-export type DeleteEvent = z.infer<typeof deleteEventSchema>;
-
-export type UpdateEvent = z.infer<typeof updateEventSchema>;
-
-export type CreateEvent = z.infer<typeof createEventSchema>;
 
 export type Event = z.infer<typeof eventSchema>;
+export type CreateEvent = z.infer<typeof createEventSchema>;
+export type UpdateEvent = z.infer<typeof updateEventSchema>;
+export type DeleteEvent = z.infer<typeof deleteEventSchema>;
