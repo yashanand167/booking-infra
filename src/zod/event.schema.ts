@@ -3,6 +3,7 @@ import {z} from "zod";
 export const eventSchema = z.object({
   id: z.string().uuid(),
   name: z.string().min(2).max(100),
+  date: z.date(),
   capacity: z.number().int().positive(),
   createdAt: z.date(),
   updatedAt: z.date(),
