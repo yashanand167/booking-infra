@@ -12,6 +12,11 @@ datasource db {
   provider = "postgresql"
 }
 
+enum BookingStatus {
+  CONFIRMED
+  CANCELLED
+}
+
 model User {
   id        String    @id @default(cuid())
   email     String    @unique
@@ -36,9 +41,12 @@ model Booking {
   id        String   @id @default(cuid())
   userId    String
   eventId   String
+  status    BookingStatus @default(CONFIRMED)
   createdAt DateTime @default(now())
+
   user  User  @relation(fields: [userId], references: [id])
   event Event @relation(fields: [eventId], references: [id])
+
   @@unique([userId, eventId])
   @@index([eventId])
 }

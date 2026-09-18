@@ -8,4 +8,7 @@ export const bookingSchema = z.object({
   updatedAt: z.date(),
 });
 
+
+
+
 export type Booking = z.infer<typeof bookingSchema>;
