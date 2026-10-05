@@ -32,12 +32,12 @@ async function main() {
     },
   })
 
-  console.log({
-    userA: userA.id,
-    userB: userB.id,
-    event: event.id,
-    seat: seat.id,
-  })
+//   console.log({
+//     userA: userA.id,
+//     userB: userB.id,
+//     event: event.id,
+//     seat: seat.id,
+//   })
 }
 
 main()
