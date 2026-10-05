@@ -8,7 +8,6 @@ const bookingsRoute = new Hono<{
   Variables: Variables;
 }>();
 
-bookingsRoute.use("*", authMiddleware);
-bookingsRoute.post("/createBooking", ...createBooking);
+bookingsRoute.post("/createBooking", authMiddleware, ...createBooking);
 
 export default bookingsRoute;
