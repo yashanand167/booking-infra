@@ -27,25 +27,52 @@ model User {
   updatedAt DateTime  @default(now())
 }
 
+enum SeatStatus {
+  AVAILABLE
+  RESERVED
+  BOOKED
+}
+
 model Event {
-  id        String    @id @default(cuid())   
+  id        String    @id @default(cuid())
   name      String
   capacity  Int
-  bookings  Booking[]
   date      DateTime
+
+  bookings  Booking[]
+  seats     Seat[]
+
   createdAt DateTime  @default(now())
-  updatedAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Seat {
+  id        String     @id @default(cuid())
+  eventId   String
+  number    Int
+  status    SeatStatus @default(AVAILABLE)
+
+  event     Event      @relation(fields: [eventId], references: [id])
+  booking   Booking?
+
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+
+  @@unique([eventId, number])
+  @@index([eventId])
 }
 
 model Booking {
-  id        String   @id @default(cuid())
+  id        String        @id @default(cuid())
   userId    String
   eventId   String
+  seatId    String        @unique
   status    BookingStatus @default(CONFIRMED)
-  createdAt DateTime @default(now())
+  createdAt DateTime      @default(now())
 
   user  User  @relation(fields: [userId], references: [id])
   event Event @relation(fields: [eventId], references: [id])
+  seat  Seat  @relation(fields: [seatId], references: [id])
 
   @@unique([userId, eventId])
   @@index([eventId])
