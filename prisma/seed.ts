@@ -22,6 +22,7 @@ async function main() {
       name: "Test Event",
       capacity: 10,
       date: new Date(),
+      bookedCount: 0,
     },
   })
 

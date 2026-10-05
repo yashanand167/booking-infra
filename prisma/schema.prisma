@@ -37,6 +37,7 @@ model Event {
   id        String    @id @default(cuid())
   name      String
   capacity  Int
+  bookedCount Int     @default(0)
   date      DateTime
 
   bookings  Booking[]

@@ -4,6 +4,7 @@ const eventFields = {
   name: z.string().min(2).max(100),
   date: z.coerce.date(),
   capacity: z.number().int().positive(),
+  bookedCount: z.number().int().nonnegative().default(0)
 };
 
 export const eventSchema = z.object({

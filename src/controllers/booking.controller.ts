@@ -8,8 +8,12 @@ const bookingService = new BookingService();
 export const createBooking = factory.createHandlers(async (c) => {
   try {
     const body = await c.req.json();
+    const userId = c.get("userId");
 
-    const result = createBookingSchema.safeParse(body);
+    const result = createBookingSchema.safeParse({
+      ...body,
+      userId,
+    });
 
     if (!result.success) {
       return c.json(
